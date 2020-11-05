@@ -56,8 +56,8 @@ void RunConnectFour() {
     bool game_over = false;
     int board[6][7] = {{0,0,0,0,0,0,0}, {0,0,0,0,0,0,0}, {0,0,0,0,0,0,0}, {0,0,0,0,0,0,0}, {0,0,0,0,0,0,0}, {0,0,0,0,0,0,0}};
     while (game_over == false) {
-        game_over = DoMove(1, GetPlayerMove(), board);
-        game_over = DoMove(2, GetPlayerMove(), board);
+        game_over = !DoMove(1, GetPlayerMove(), board);
+        game_over = !DoMove(2, GetPlayerMove(), board);
         DisplayBoard(board);
     }
 }
@@ -68,7 +68,7 @@ int GetPlayerMove() {
     return move_colummn - 1;
 }
 bool DoMove(int player, int colummn, int board[][7]) {
-    for (int i = 6; i > 0; i--) {
+    for (int i = 6; i >= 0; i--) {
         if (board[i][colummn] == 0) {
             board[i][colummn] = player;
             return true;
