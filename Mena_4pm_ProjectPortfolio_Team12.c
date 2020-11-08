@@ -102,7 +102,19 @@ void DisplayBoard(int board[][7]) {
         printf("\n\n\n\n\n");
     }
 }
-int CheckNorth();
+int CheckNorth(int row, int col) {
+    int count = 0;
+    int i=row;
+    while (board[i][col] == board[i-1][col]) {
+        count++;
+        i--;
+        if (i <= 1)
+        {
+            break;
+        }
+    }
+    return count;
+}
 int CheckEast();
 int CheckSouth();
 int CheckWest();
