@@ -104,7 +104,11 @@ void DisplayBoard(int board[][7]) {
 }
 int CheckNorth(int row, int col) {
     int count = 0;
-    int i=row;
+    int i = row;
+    if (i <= 1)
+    {
+        return 0;
+    }
     while (board[i][col] == board[i-1][col]) {
         count++;
         i--;
@@ -115,9 +119,54 @@ int CheckNorth(int row, int col) {
     }
     return count;
 }
-int CheckEast();
-int CheckSouth();
+int CheckEast(int row, int col);
+    int count = 0;
+    int i = col;
+    if (i >= 5)
+    {
+        break;
+    }
+    while (board[row][i] == board[row][i+1]) {
+        count++;
+        i++;
+        if (i >= 5)
+        {
+            break;
+        }
+    }
+    return count;
+int CheckSouth(int row, int col);
+    int count = 0;
+    int i = row;
+    if (i >= 4)
+    {
+        return 0;
+    }
+    while (board[i][col] == board[i+1][col]) {
+        count++;
+        i++;
+        if (i >= 4)
+        {
+            break;
+        }
+    }
+    return count;
 int CheckWest();
+    int count = 0;
+    int i = col;
+    if (i <= 1)
+    {
+        return 0;
+    }
+    while (board[row][i] == board[row][i-1]) {
+        count++;
+        i--;
+        if (i <= 1)
+        {
+            break;
+        }
+    }
+    return count;
 int CheckNorthEast();
 int CheckSouthEast();
 int CheckSouthWest();
