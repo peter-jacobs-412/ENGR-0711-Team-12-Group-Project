@@ -25,10 +25,10 @@ int GetPlayerMove();
 //Returns false if the move cant be executed
 bool DoMove(int player, int colummn, int board[][7]);
 //this sets of functions checks how many pieces of equal value are in that direction given a location in the array
-int CheckNorth();
-int CheckEast();
-int CheckSouth();
-int CheckWest();
+int CheckNorth(int row, int col, int board[][7]);
+int CheckEast(int row, int col, int board[][7]);
+int CheckSouth(int row, int col, int board[][7]);
+int CheckWest(int row, int col, int board[][7]);
 int CheckNorthEast();
 int CheckSouthEast();
 int CheckSouthWest();
@@ -102,71 +102,66 @@ void DisplayBoard(int board[][7]) {
         printf("\n\n\n\n\n");
     }
 }
-int CheckNorth(int row, int col) {
+int CheckNorth(int row, int col, int board[][7]) {
     int count = 0;
     int i = row;
-    if (i <= 1)
-    {
-        return 0;
+    if (i == 0) {
+        return 1;
     }
     while (board[i][col] == board[i-1][col]) {
         count++;
         i--;
-        if (i <= 1)
-        {
+        if (i == 0) {
             break;
         }
     }
     return count;
 }
-int CheckEast(int row, int col);
+int CheckEast(int row, int col, int board[][7]) {
     int count = 0;
     int i = col;
-    if (i >= 5)
-    {
-        break;
+    if (i == 6) {
+        return 1;
     }
     while (board[row][i] == board[row][i+1]) {
         count++;
         i++;
-        if (i >= 5)
-        {
+        if (i == 6) {
             break;
         }
     }
     return count;
-int CheckSouth(int row, int col);
+}
+int CheckSouth(int row, int col, int board[][7]) {
     int count = 0;
     int i = row;
-    if (i >= 4)
-    {
-        return 0;
+    if (i  == 5) {
+        return 1;
     }
     while (board[i][col] == board[i+1][col]) {
         count++;
         i++;
-        if (i >= 4)
-        {
+        if (i == 5) {
             break;
         }
     }
     return count;
-int CheckWest();
+}
+int CheckWest(int row, int col, int board[][7]) {
     int count = 0;
     int i = col;
-    if (i <= 1)
-    {
-        return 0;
+    if (i == 0) {
+        return 1;
     }
     while (board[row][i] == board[row][i-1]) {
         count++;
         i--;
-        if (i <= 1)
-        {
+        if (i == 0) {
             break;
         }
     }
     return count;
+}
 int CheckNorthEast();
 int CheckSouthEast();
 int CheckSouthWest();
