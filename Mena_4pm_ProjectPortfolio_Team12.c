@@ -55,6 +55,12 @@ int main() {
     printf("Would You like to play GAME 1 or GAME 2? (1/2): ");
     scanf("%d", &which_game);
     RunConnectFour();
+    //Error check
+    while(which_game)
+    {
+        printf("ERROR! Please enter 1 for GAME 1 or 2 for GAME 2: ");
+        scanf("%d", &which_game);
+    }
 }
 /* ##################################################################### */
 /* #################### GAME 1 FUNCTION DEFINITIONS #################### */
