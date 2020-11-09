@@ -29,10 +29,10 @@ int CheckNorth(int row, int col, int board[][7]);
 int CheckEast(int row, int col, int board[][7]);
 int CheckSouth(int row, int col, int board[][7]);
 int CheckWest(int row, int col, int board[][7]);
-int CheckNorthEast();
-int CheckSouthEast();
-int CheckSouthWest();
-int CheckNorthWest();
+int CheckNorthEast(int row, int col, int board[][7]);
+int CheckSouthEast(int row, int col, int board[][7]);
+int CheckSouthWest(int row, int col, int board[][7]);
+int CheckNorthWest(int row, int col, int board[][7]);
 //This Function Should return a value between 1 and 4 based on the maximum amount of tiles in a row at the given space. it dtermines the given space by being passed a i and a j value
 int CheckWinner();
 //this function is meant for debugging and testing purposes it will have a bunch of diffrent code in it all of which can be commented out in order to test specifc things
@@ -121,14 +121,14 @@ int CheckNorth(int row, int col, int board[][7]) {
 }
 int CheckEast(int row, int col, int board[][7]) {
     int count = 1;
-    int i = col;
-    if (i == 6) {
+    int j = col;
+    if (j == 6) {
         return 1;
     }
-    while (board[row][i] == board[row][i+1]) {
+    while (board[row][j] == board[row][j+1]) {
         count++;
-        i++;
-        if (i == 6) {
+        j++;
+        if (j == 6) {
             break;
         }
     }
@@ -151,23 +151,45 @@ int CheckSouth(int row, int col, int board[][7]) {
 }
 int CheckWest(int row, int col, int board[][7]) {
     int count = 1;
-    int i = col;
-    if (i == 0) {
+    int j = col;
+    if (j == 0) {
         return 1;
     }
-    while (board[row][i] == board[row][i-1]) {
+    while (board[row][j] == board[row][j-1]) {
         count++;
-        i--;
-        if (i == 0) {
+        j--;
+        if (j == 0) {
             break;
         }
     }
     return count;
 }
-int CheckNorthEast();
-int CheckSouthEast();
-int CheckSouthWest();
-int CheckNorthWest();
+int CheckNorthEast(int row, int col, int board[][7]) {
+    
+}
+int CheckSouthEast(int row, int col, int board[][7]) {
+    int count = 1;
+    int i = row;
+    int j = col;
+    if (i == 5 || j == 6) {
+        return 1;
+    }
+    while (board[i][j] == board[i+1][j+1]) {
+        count++;
+        i++;
+        j++;
+        if (i == 5 || j == 6) {
+            break;
+        }
+    }
+    return count;
+}
+int CheckSouthWest(int row, int col, int board[][7]) {
+
+}
+int CheckNorthWest(int row, int col, int board[][7]) {
+
+}
 int CheckWinner();
 void TesterFunction(int board[][7]) {
     //check the return value of north west east and south for a given i and j location
