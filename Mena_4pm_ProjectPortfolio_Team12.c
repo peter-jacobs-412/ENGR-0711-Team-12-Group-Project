@@ -25,16 +25,18 @@ int GetPlayerMove();
 //Returns false if the move cant be executed
 bool DoMove(int player, int colummn, int board[][7]);
 //this sets of functions checks how many pieces of equal value are in that direction given a location in the array
-int CheckNorth();
-int CheckEast();
-int CheckSouth();
-int CheckWest();
+int CheckNorth(int row, int col, int board[][7]);
+int CheckEast(int row, int col, int board[][7]);
+int CheckSouth(int row, int col, int board[][7]);
+int CheckWest(int row, int col, int board[][7]);
 int CheckNorthEast();
 int CheckSouthEast();
 int CheckSouthWest();
 int CheckNorthWest();
 //This Function Should return a value between 1 and 4 based on the maximum amount of tiles in a row at the given space. it dtermines the given space by being passed a i and a j value
 int CheckWinner();
+//this function is meant for debugging and testing purposes it will have a bunch of diffrent code in it all of which can be commented out in order to test specifc things
+void TesterFunction(int board[][7]);
 //
 /* ====================================================== */
 /* ==================== GAME 1 NOTES ==================== */
@@ -55,6 +57,11 @@ int main() {
     printf("Would You like to play GAME 1 or GAME 2? (1/2): ");
     scanf("%d", &which_game);
     RunConnectFour();
+    //Error check
+    while (which_game != 1 && which_game != 2) {
+        printf("ERROR! Please enter 1 for GAME 1 or 2 for GAME 2: ");
+        scanf("%d", &which_game);
+    }
 }
 /* ##################################################################### */
 /* #################### GAME 1 FUNCTION DEFINITIONS #################### */
@@ -67,6 +74,7 @@ void RunConnectFour() {
         game_over = !DoMove(1, GetPlayerMove(), board);
         game_over = !DoMove(2, GetPlayerMove(), board);
         DisplayBoard(board);
+        TesterFunction(board);
     }
 }
 int GetPlayerMove() {
@@ -96,15 +104,80 @@ void DisplayBoard(int board[][7]) {
         printf("\n\n\n\n\n");
     }
 }
-int CheckNorth();
-int CheckEast();
-int CheckSouth();
-int CheckWest();
+int CheckNorth(int row, int col, int board[][7]) {
+    int count = 1;
+    int i = row;
+    if (i == 0) {
+        return 1;
+    }
+    while (board[i][col] == board[i-1][col]) {
+        count++;
+        i--;
+        if (i == 0) {
+            break;
+        }
+    }
+    return count;
+}
+int CheckEast(int row, int col, int board[][7]) {
+    int count = 1;
+    int i = col;
+    if (i == 6) {
+        return 1;
+    }
+    while (board[row][i] == board[row][i+1]) {
+        count++;
+        i++;
+        if (i == 6) {
+            break;
+        }
+    }
+    return count;
+}
+int CheckSouth(int row, int col, int board[][7]) {
+    int count = 1;
+    int i = row;
+    if (i  == 5) {
+        return 1;
+    }
+    while (board[i][col] == board[i+1][col]) {
+        count++;
+        i++;
+        if (i == 5) {
+            break;
+        }
+    }
+    return count;
+}
+int CheckWest(int row, int col, int board[][7]) {
+    int count = 1;
+    int i = col;
+    if (i == 0) {
+        return 1;
+    }
+    while (board[row][i] == board[row][i-1]) {
+        count++;
+        i--;
+        if (i == 0) {
+            break;
+        }
+    }
+    return count;
+}
 int CheckNorthEast();
 int CheckSouthEast();
 int CheckSouthWest();
 int CheckNorthWest();
 int CheckWinner();
+void TesterFunction(int board[][7]) {
+    //check the return value of north west east and south for a given i and j location
+    int row, colummn;
+    printf("Enter row and col: ");
+    scanf("%d%d", &row, &colummn);
+    printf("At row = %d and colummn = %d: \n", row, colummn);
+    printf("East is %d\nWest is %d\nNorth is %d\nSouth is %d\n", CheckEast(row, colummn, board), CheckWest(row, colummn, board), CheckNorth(row, colummn, board), CheckSouth(row, colummn, board));
+
+}
 /* ##################################################################### */
 /* #################### GAME 2 FUNCTION DEFINITIONS #################### */
 /* ##################################################################### */
