@@ -14,7 +14,7 @@
 /* ##################################################################### */
 //Everything needed to run the connect 4 game will be contained inside this function to keep main cleaner.
 //Depending on how we do the game this might have an input for Player Vs AI or Player Vs Player.
-// One idea i have for this if we make it an option is its an int 0 is player 1 is easy Ai 2 is medium AI 3 is Hard AI
+//One idea i have for this if we make it an option is its an int 0 is player 1 is easy Ai 2 is medium AI 3 is Hard AI
 void RunConnectFour();
 //This function displays the board
 //currently very simple formattting we should try and improve this if possible
@@ -25,6 +25,8 @@ int GetPlayerMove();
 //Returns false if the move cant be executed
 bool DoMove(int player, int colummn, int board[][7]);
 //this sets of functions checks how many pieces of equal value are in that direction given a location in the array
+//when working with the functions wee will use iterators of i and j for the rows and coluummns specfically.
+//note that becasue of the way array indexes work south is defined as postive i direction and east is defined as postive j
 int CheckNorth(int row, int col, int board[][7]);
 int CheckEast(int row, int col, int board[][7]);
 int CheckSouth(int row, int col, int board[][7]);
@@ -165,7 +167,21 @@ int CheckWest(int row, int col, int board[][7]) {
     return count;
 }
 int CheckNorthEast(int row, int col, int board[][7]) {
-    
+    int count = 1;
+    int i = row;
+    int j = col;
+    if (i == 0 || j == 6) {
+        return 1;
+    }
+    while (board[i][j] == board[i-1][j+1]) {
+        count++;
+        i--;
+        j++;
+        if (i == 0 || j == 6) {
+            break;
+        }
+    }
+    return count;
 }
 int CheckSouthEast(int row, int col, int board[][7]) {
     int count = 1;
@@ -185,10 +201,38 @@ int CheckSouthEast(int row, int col, int board[][7]) {
     return count;
 }
 int CheckSouthWest(int row, int col, int board[][7]) {
-
+    int count = 1;
+    int i = row;
+    int j = col;
+    if (i == 5 || j == 0) {
+        return 1;
+    }
+    while (board[i][j] == board[i+1][j-1]) {
+        count++;
+        i++;
+        j--;
+        if (i == 5 || j == 0) {
+            break;
+        }
+    }
+    return count;
 }
 int CheckNorthWest(int row, int col, int board[][7]) {
-
+    int count = 1;
+    int i = row;
+    int j = col;
+    if (i == 0 || j == 0) {
+        return 1;
+    }
+    while (board[i][j] == board[i-1][j-1]) {
+        count++;
+        i--;
+        j--;
+        if (i == 0 || j == 0) {
+            break;
+        }
+    }
+    return count;
 }
 int CheckWinner();
 void TesterFunction(int board[][7]) {
