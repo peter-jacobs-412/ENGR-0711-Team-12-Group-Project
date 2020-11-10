@@ -16,14 +16,18 @@
 //Depending on how we do the game this might have an input for Player Vs AI or Player Vs Player.
 //One idea i have for this if we make it an option is its an int 0 is player 1 is easy Ai 2 is medium AI 3 is Hard AI
 void RunConnectFour();
+
 //This function displays the board
 //currently very simple formattting we should try and improve this if possible
 void DisplayBoard(int board[][7]);
+
 //This Function gets the players move and then passes it back to be executed
 int GetPlayerMove();
-//This Function Adds to move decided by the player or the AI
+
+//This Function Adds the move decided by the player or the AI
 //Returns false if the move cant be executed
 bool DoMove(int player, int colummn, int board[][7]);
+
 //this sets of functions checks how many pieces of equal value are in that direction given a location in the array
 //when working with the functions wee will use iterators of i and j for the rows and coluummns specfically.
 //note that becasue of the way array indexes work south is defined as postive i direction and east is defined as postive j
@@ -35,8 +39,10 @@ int CheckNorthEast(int row, int col, int board[][7]);
 int CheckSouthEast(int row, int col, int board[][7]);
 int CheckSouthWest(int row, int col, int board[][7]);
 int CheckNorthWest(int row, int col, int board[][7]);
+
 //This Function Should return a value between 1 and 4 based on the maximum amount of tiles in a row at the given space. it dtermines the given space by being passed a i and a j value
 int CheckWinner();
+
 //this function is meant for debugging and testing purposes it will have a bunch of diffrent code in it all of which can be commented out in order to test specifc things
 void TesterFunction(int board[][7]);
 //
@@ -234,7 +240,9 @@ int CheckNorthWest(int row, int col, int board[][7]) {
     }
     return count;
 }
-int CheckWinner();
+int CheckWinner() {
+
+}
 void TesterFunction(int board[][7]) {
     //check the return value of north west east and south for a given i and j location
     int row, colummn;
