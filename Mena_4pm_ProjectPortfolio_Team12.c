@@ -60,7 +60,7 @@ void TesterFunction(int board[][7]);
 /* ################################ MAIN ############################### */
 /* ##################################################################### */
 int main() {
-    //asks them which game they want to play
+    //asks them which game they want to plays
     int which_game;
     printf("Would You like to play GAME 1 or GAME 2? (1/2): ");
     scanf("%d", &which_game);
