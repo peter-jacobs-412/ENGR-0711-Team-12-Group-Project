@@ -41,7 +41,7 @@ int CheckSouthWest(int row, int col, int board[][7]);
 int CheckNorthWest(int row, int col, int board[][7]);
 
 //This Function Should return a value between 1 and 4 based on the maximum amount of tiles in a row at the given space. it dtermines the given space by being passed a i and a j value
-int CheckWinner();
+int CheckSpot(int row, int col, int board[][7]);
 
 //this function is meant for debugging and testing purposes it will have a bunch of diffrent code in it all of which can be commented out in order to test specifc things
 void TesterFunction(int board[][7]);
@@ -239,6 +239,24 @@ int CheckNorthWest(int row, int col, int board[][7]) {
         }
     }
     return count;
+}
+int CheckSpot(int row, int col, int board[][7]) {
+    int outputs[8];
+    outputs[0] = CheckNorth(row, col, board);
+    outputs[1] = CheckNorthEast(row, col, board);
+    outputs[2] = CheckEast(row, col, board);
+    outputs[3] = CheckSouthEast(row, col, board);
+    outputs[4] = CheckSouth(row, col, board);
+    outputs[5] = CheckSouthWest(row, col, board);
+    outputs[6] = CheckWest(row, col, board);
+    outputs[7] = CheckNorthWest(row, col, board);
+    int max = 0;
+    for (int i = 0; i < 8; i++) {
+        if (outputs[i] > max) {
+            max = outputs[i];
+        }
+    }
+    return max;
 }
 int CheckWinner() {
 
