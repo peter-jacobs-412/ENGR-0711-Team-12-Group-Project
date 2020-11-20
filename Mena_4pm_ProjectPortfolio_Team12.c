@@ -43,6 +43,9 @@ int CheckNorthWest(int row, int col, int board[][7]);
 //This Function Should return a value between 1 and 4 based on the maximum amount of tiles in a row at the given space. it dtermines the given space by being passed a i and a j value
 int CheckSpot(int row, int col, int board[][7]);
 
+//This function should check the board for any winning sequences of 4 or more tiles in a row to detect any wins
+int CheckWinner(int board[][7], int winningSpace[]);
+
 //this function is meant for debugging and testing purposes it will have a bunch of diffrent code in it all of which can be commented out in order to test specifc things
 void TesterFunction(int board[][7]);
 //
@@ -258,8 +261,22 @@ int CheckSpot(int row, int col, int board[][7]) {
     }
     return max;
 }
-int CheckWinner() {
-
+int CheckWinner(int board[][7], int winningSpace[]) {
+    int i, j;
+    for (i=0; i<6,i++) {
+        for (j=0;j<7;j++) {
+            if (checkSpot(board[i][j]>=4) {
+                //If a win is detected, return 1 and save the location the win was at in the winningSpace array
+                winningSpace[0]=i;
+                winningSpace[1]=j;
+                return 1;
+            }
+            else {
+                //If no win is detected, return 0
+                return 0;
+            }
+        }
+    }
 }
 void TesterFunction(int board[][7]) {
     //check the return value of north west east and south for a given i and j location
