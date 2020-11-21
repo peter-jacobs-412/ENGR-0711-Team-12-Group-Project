@@ -264,7 +264,7 @@ int CheckSpot(int row, int col, int board[][7]) {
 int CheckWinner(int board[][7], int winningSpace[]) {
     int i, j;
     for (i=0; i<6; i++) {
-        for (j=0; j<7 ;j++) {
+        for (j=0; j<7; j++) {
             if (CheckSpot(i, j, board)>=4) {
                 //If a win is detected, return 1 and save the location the win was at in the winningSpace array
                 winningSpace[0]=i;
