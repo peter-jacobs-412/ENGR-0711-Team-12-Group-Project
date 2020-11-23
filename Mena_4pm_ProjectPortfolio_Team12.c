@@ -271,12 +271,10 @@ int CheckWinner(int board[][7], int winningSpace[]) {
                 winningSpace[1]=j;
                 return 1;
             }
-            else {
-                //If no win is detected, return 0
-                return 0;
-            }
         }
     }
+    //If no win is detected, return 0
+    return 0;
 }
 void TesterFunction(int board[][7]) {
     //check the return value of north west east and south for a given i and j location
