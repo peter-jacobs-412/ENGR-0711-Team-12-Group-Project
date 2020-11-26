@@ -16,9 +16,12 @@ int playerChoice(void);
 //betting function(still working on)
 void DefineBet(int, double[]);
 //randomCard draws a card and CheckRand makes sure the card drawn isn't already drawn
-void randomCard(int, int);
-int CheckRand(int, int);
+void randomCard(int, int, int[][2], int[][2], int[][2], int[][2]);
+int CheckRand(int, int, int[][2], int[][2], int[][2], int[][2]);
 
+//randomCommunityCard draws community cards and CheckRandCommunity makes sure the community cards drawn aren't already drawn
+void randomCommunityCard(int, int[][2]);
+int CheckRandCommunity(int, int[][2]);
 
 //main
 int main() {
@@ -357,19 +360,30 @@ int CheckRand(int playeridentifier, int draw, int player1cards, int player2cards
 //This function draws the community cards
 void randomCommunityCard(int draw, int communitycards[][2])
 {
-	int r, face, value;
+	int r, face, value, face2, value2, face3, value3;
 	r = rand();
 	face = (r% 4)+1;
 	value = (r% 13) +1;
 	switch(draw)
 	{
 		case 1: //The Flop
+		
+		do {
+			face2 = (r% 4)+1;
+			value2 = (r% 13) +1;
+		} while (face == face2 && value == value2);
+		
+		do {
+			face3 = (r% 4)+1;
+			value3 = (r% 13) +1;
+		} while ( (face == face3 && value == value3) || (face2 == face3 && value2 == value3) );
+	
 		communitycards[0][0] = face;
 		communitycards[0][1] = value;
-		communitycards[1][0] = face;
-		communitycards[1][1] = value;
-		communitycards[2][0] = face;
-		communitycards[2][1] = value;
+		communitycards[1][0] = face2;
+		communitycards[1][1] = value2;
+		communitycards[2][0] = face3;
+		communitycards[2][1] = value3;
 		break;
 		
 		case 2: //The Turn
