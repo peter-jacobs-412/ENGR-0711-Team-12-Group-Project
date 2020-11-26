@@ -51,13 +51,18 @@ void RunTexasHoldem(void)
 	double playerbets[4];
 	//players cards
 	//the first column holds the suite and second column is value
-	int player1cards[5][2], player2cards[5][2], player3cards[5][2], player4cards[5][2];
-	
+	//two private/hole cards for each player
+	int player1cards[2][2], player2cards[2][2], player3cards[2][2], player4cards[2][2];
+
+	//Five community cards
+	//the first column holds suite and second column holds value
+	int communitycards[5][2];
+
 	//player choice function
 	//i only made it a max of 4 players
 	int playerNum, i, correct;
 	playerNum = playerChoice();
-	DefineBet(playerNum, playerbets[]);
+	DefineBet(playerNum, playerbets);
 	
 	//start of game
 	//opening round dealing of cards
@@ -132,6 +137,15 @@ void RunTexasHoldem(void)
 			correct = CheckRand(i,2);
 		}while(correct == 1);
 	}
+
+	//The Flop
+	//Dealer shows three community cards
+	do
+	{
+		randomCommunityCard(1, communitycards);
+		correct = CheckRandCommunity(1, communitycards);
+	}while(correct == 1);
+
 }
 
 //choose number of players and returns number needed for betting
@@ -215,7 +229,7 @@ void DefineBet(int playerNum, double playerbets[])
 		//four players no cpu
 		case 4:
 		printf("Player %d is the dealer, player %d is the small blind, and player %d is the big blind", dealer, (dealer+1)%4, (dealer+2)%4;
-		printf("What is Player %d's bet? ", (dealer+3)%4;
+		printf("What is Player %d's bet? ", (dealer+3)%4);
 		scanf("%lf", playerbets[(dealer+3)%4]);
 		break;
 	}
@@ -225,7 +239,7 @@ void DefineBet(int playerNum, double playerbets[])
 //playeridentifier selects what player the system is drawing for
 //draw is identifying what round is being drawn now
 //for example draw would be 1 if it is the first round of drawings
-void randomCard(int playeridentifier, int draw)
+void randomCard(int playeridentifier, int draw, int player1cards[][2], int player2cards[][2], int player3cards[][2], int player4cards[][2])
 {
 	int r, face, value;
 	r = rand();
@@ -256,7 +270,7 @@ void randomCard(int playeridentifier, int draw)
 }
 
 //this function checks to make sure the card chosen by randomCard is not already chosen
-int CheckRand(int playeridentifier, int draw)
+int CheckRand(int playeridentifier, int draw, int player1cards, int player2cards, int player3cards, int player4cards)
 {
 	int correct = 1;
 	switch(playeridentifier)
@@ -335,6 +349,93 @@ int CheckRand(int playeridentifier, int draw)
 		{
 			correct = 0;
 		}
+		break;
+	}
+	return(correct);
+}
+
+//This function draws the community cards
+void randomCommunityCard(int draw, int communitycards[][2])
+{
+	int r, face, value;
+	r = rand();
+	face = (r% 4)+1;
+	value = (r% 13) +1;
+	switch(draw)
+	{
+		case 1: //The Flop
+		communitycards[0][0] = face;
+		communitycards[0][1] = value;
+		communitycards[1][0] = face;
+		communitycards[1][1] = value;
+		communitycards[2][0] = face;
+		communitycards[2][1] = value;
+		break;
+		
+		case 2: //The Turn
+		communitycards[3][0] = face;
+		communitycards[3][1] = value;
+		break;
+		
+		case 3: //The River
+		communitycards[4][0] = face;
+		communitycards[4][1] = value;
+		break;
+	}
+}
+
+//this function checks to make sure the cards/card chosen by randomCard is not already chosen
+int CheckRandCommunity(int draw, int communitycards[][2])
+{
+	int correct = 0;
+	switch(draw)
+	{
+		case 1: //The Flop
+		{
+			for (i=0; i<3; i++)
+			{
+				for (j=0; j<2; j++)
+				{
+					if (communitycards[i][0] == player1cards[j][0] && communitycards[i][1] == player1cards[j][1])
+						correct = 1;
+					if (communitycards[i][0] == player2cards[j][0] && communitycards[i][1] == player2cards[j][1])
+						correct = 1;
+					if (communitycards[i][0] == player3cards[j][0] && communitycards[i][1] == player3cards[j][1])
+						correct = 1;
+					if (communitycards[i][0] == player4cards[j][0] && communitycards[i][1] == player4cards[j][1])
+						correct = 1;
+				}
+			}
+		}
+		break;
+
+		case 2: //The Turn
+			for (j=0; j<2; j++)
+			{
+				if (communitycards[3][0] == player1cards[j][0] && communitycards[3][1] == player1cards[j][1])
+					correct = 1;
+				if (communitycards[3][0] == player2cards[j][0] && communitycards[3][1] == player2cards[j][1])
+					correct = 1;
+				if (communitycards[3][0] == player3cards[j][0] && communitycards[3][1] == player3cards[j][1])
+					correct = 1;
+				if (communitycards[3][0] == player4cards[j][0] && communitycards[3][1] == player4cards[j][1])
+					correct = 1;
+			}
+		break;
+
+		case 3: //The River
+			for (j=0; j<2; j++)
+			{
+				if (communitycards[4][0] == player1cards[j][0] && communitycards[4][1] == player1cards[j][1])
+					correct = 1;
+				if (communitycards[4][0] == player2cards[j][0] && communitycards[4][1] == player2cards[j][1])
+					correct = 1;
+				if (communitycards[4][0] == player3cards[j][0] && communitycards[4][1] == player3cards[j][1])
+					correct = 1;
+				if (communitycards[4][0] == player4cards[j][0] && communitycards[4][1] == player4cards[j][1])
+					correct = 1;
+				}
+			}
 		break;
 	}
 	return(correct);
