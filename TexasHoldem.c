@@ -14,7 +14,7 @@ void RunTexasHoldem(void);
 //chooses how many players are playing
 int playerChoice(void);
 //betting function(still working on)
-void DefineBet(int);
+void DefineBet(int, double[]);
 //randomCard draws a card and CheckRand makes sure the card drawn isn't already drawn
 void randomCard(int, int);
 int CheckRand(int, int);
@@ -22,13 +22,6 @@ int CheckRand(int, int);
 
 //main
 int main() {
-	//Variables
-	//player bets
-	double playerbets[4];
-	//players cards
-	//the first column holds the suite and second column is value
-	int player1cards[5][2], player2cards[5][2], player3cards[5][2], player4cards[5][2];
-
 	//seeding for random number
 	unsigned seed = 7;
 	srand(seed);
@@ -53,11 +46,18 @@ void Directions(void)
 // the order of dealings also goes into this
 void RunTexasHoldem(void)
 {
+	//Variables
+	//player bets
+	double playerbets[4];
+	//players cards
+	//the first column holds the suite and second column is value
+	int player1cards[5][2], player2cards[5][2], player3cards[5][2], player4cards[5][2];
+	
 	//player choice function
 	//i only made it a max of 4 players
 	int playerNum, i, correct;
 	playerNum = playerChoice();
-	DefineBet(playerNum);
+	DefineBet(playerNum, playerbets[]);
 	
 	//start of game
 	//opening round dealing of cards
@@ -150,9 +150,8 @@ int playerChoice(void)
 //defines the initial bets for the players and cpu's if applicable
 //i am not too familiar with betting in this game so I will leave it to one of you guys to figure it out
 //i made this function for the bets, but I don't know how the blinds and different roles factor in
-void DefineBet(int playerNum)
+void DefineBet(int playerNum, double playerbets[])
 {
-	double userbet;
 	//players are player1=0, player2=1, player3=2, and player4=3, going clockwise
 	int dealer = 0; //Start with first player=0 as dealer
 	int smallblind = (dealer+1)%4;
