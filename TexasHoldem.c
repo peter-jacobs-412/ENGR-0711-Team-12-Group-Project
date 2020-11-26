@@ -4,13 +4,6 @@
 #include <string.h>
 #include <math.h>
 
-//global variables
-//player bets
-double player1bet, player2bet, player3bet, player4bet;
-//players cards
-//the first column holds the suite and second column is value
-int player1cards[5][2], player2cards[5][2], player3cards[5][2], player4cards[5][2];
-
 
 //function prototypes
 //i put a little bit more detail at the bottom for each function's definitions
@@ -29,6 +22,13 @@ int CheckRand(int, int);
 
 //main
 int main() {
+	//Variables
+	//player bets
+	double playerbets[4];
+	//players cards
+	//the first column holds the suite and second column is value
+	int player1cards[5][2], player2cards[5][2], player3cards[5][2], player4cards[5][2];
+
 	//seeding for random number
 	unsigned seed = 7;
 	srand(seed);
@@ -142,7 +142,7 @@ int playerChoice(void)
 	{
 		printf("How many players are playing the game? (1-4) ");
 		scanf("%d", &playerNum);
-	}while(playerNum > 4);
+	}while(playerNum > 4 && playerNum < 1);
 	printf("\n%d player game \n\n", playerNum);
 	return(playerNum);
 }
@@ -152,27 +152,53 @@ int playerChoice(void)
 //i made this function for the bets, but I don't know how the blinds and different roles factor in
 void DefineBet(int playerNum)
 {
+	double userbet;
+	//Start with first player as dealer, players are 1, 2, 3, and 4, going clockwise
+	int dealer = 1;
+
+	//Define initial bets
 	switch(playerNum)
 	{
 		//one player 3 cpu
 		case 1:
-		printf("What is Player 1's bet? ");
+		printf("Player %d is the dealer, player %d is the small blind, and player %d is the big blind", dealer, (dealer+1)%4, (dealer+2)%4;
+		//cpus are players 1, 2, and 3
+		if ((dealer+3)%4 == 4)
+		{
+			printf("What is Player %d's bet? ", (dealer+3)%4;
+			scanf("%lf", playerbets[(dealer+3)%4]);
+		}
 		
 		break;
 		
 		//two players two cpu
+		//cpus are players 1 and 2
 		case 2:
+		printf("Player %d is the dealer, player %d is the small blind, and player %d is the big blind", dealer, (dealer+1)%4, (dealer+2)%4;
+		if ((dealer+3)%4 >= 3)
+		{
+			printf("What is Player %d's bet? ", (dealer+3)%4;
+			scanf("%lf", playerbets[(dealer+3)%4]);
+		}
 		
 		break;
 		
 		//three players one cpu
+		//cpu is player 1
 		case 3:
-		
+		printf("Player %d is the dealer, player %d is the small blind, and player %d is the big blind", dealer, (dealer+1)%4, (dealer+2)%4;
+		if ((dealer+3)%4 >= 2)
+		{
+			printf("What is Player %d's bet? ", (dealer+3)%4;
+			scanf("%lf", playerbets[(dealer+3)%4]);
+		}
 		break;
 		
 		//four players no cpu
 		case 4:
-		
+		printf("Player %d is the dealer, player %d is the small blind, and player %d is the big blind", dealer, (dealer+1)%4, (dealer+2)%4;
+		printf("What is Player %d's bet? ", (dealer+3)%4;
+		scanf("%lf", playerbets[(dealer+3)%4]);
 		break;
 	}
 }
