@@ -147,14 +147,14 @@ int playerChoice(void)
 	return(playerNum);
 }
 
-//defines the bets for the players and cpu's if applicable
+//defines the initial bets for the players and cpu's if applicable
 //i am not too familiar with betting in this game so I will leave it to one of you guys to figure it out
 //i made this function for the bets, but I don't know how the blinds and different roles factor in
 void DefineBet(int playerNum)
 {
 	double userbet;
-	//Start with first player=0 as dealer, players are player1=0, player2=1, player3=2, and player4=3, going clockwise
-	int dealer = 1;
+	//players are player1=0, player2=1, player3=2, and player4=3, going clockwise
+	int dealer = 0; //Start with first player=0 as dealer
 	int smallblind = (dealer+1)%4;
 	int bigblind = (dealer+2)%4;
 
