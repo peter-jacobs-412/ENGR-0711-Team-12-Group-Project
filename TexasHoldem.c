@@ -153,21 +153,32 @@ int playerChoice(void)
 void DefineBet(int playerNum)
 {
 	double userbet;
-	//Start with first player as dealer, players are 1, 2, 3, and 4, going clockwise
+	//Start with first player=0 as dealer, players are player1=0, player2=1, player3=2, and player4=3, going clockwise
 	int dealer = 1;
+	int smallblind = (dealer+1)%4;
+	int bigblind = (dealer+2)%4;
+
 
 	//Define initial bets
 	switch(playerNum)
 	{
 		//one player 3 cpu
 		case 1:
-		printf("Player %d is the dealer, player %d is the small blind, and player %d is the big blind", dealer, (dealer+1)%4, (dealer+2)%4;
+		printf("Player %d is the dealer, player %d is the small blind, and player %d is the big blind", dealer, smallblind, bigblind);
+		playerbets[smallblind] = 1;
+		playerbets[bigblind] = 2;
 		//cpus are players 1, 2, and 3
 		if ((dealer+3)%4 == 4)
 		{
-			printf("What is Player %d's bet? ", (dealer+3)%4;
+			printf("What is Player %d's bet? ", (dealer+3)%4);
 			scanf("%lf", playerbets[(dealer+3)%4]);
 		}
+		else
+		{
+			playerbets[(dealer+3)%4] = 2;
+		}
+		
+		
 		
 		break;
 		
@@ -177,8 +188,12 @@ void DefineBet(int playerNum)
 		printf("Player %d is the dealer, player %d is the small blind, and player %d is the big blind", dealer, (dealer+1)%4, (dealer+2)%4;
 		if ((dealer+3)%4 >= 3)
 		{
-			printf("What is Player %d's bet? ", (dealer+3)%4;
+			printf("What is Player %d's bet? ", (dealer+3)%4);
 			scanf("%lf", playerbets[(dealer+3)%4]);
+		}
+		else
+		{
+			playerbets[(dealer+3)%4] = 2;
 		}
 		
 		break;
@@ -189,8 +204,12 @@ void DefineBet(int playerNum)
 		printf("Player %d is the dealer, player %d is the small blind, and player %d is the big blind", dealer, (dealer+1)%4, (dealer+2)%4;
 		if ((dealer+3)%4 >= 2)
 		{
-			printf("What is Player %d's bet? ", (dealer+3)%4;
+			printf("What is Player %d's bet? ", (dealer+3)%4);
 			scanf("%lf", playerbets[(dealer+3)%4]);
+		}
+		else
+		{
+			playerbets[(dealer+3)%4] = 2;
 		}
 		break;
 		
