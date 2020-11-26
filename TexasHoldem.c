@@ -75,8 +75,8 @@ void RunTexasHoldem(void)
 	{
 		do
 		{
-			randomCard(i, 1);
-			correct = CheckRand(i,1);
+			randomCard(i, 1, player1cards, player2cards, player3cards, player4cards);
+			correct = CheckRand(i,1, player1cards, player2cards, player3cards, player4cards);
 		}while(correct == 1);
 		switch (i)
 		{
@@ -100,8 +100,8 @@ void RunTexasHoldem(void)
 	{
 		do
 		{
-			randomCard(i, 1);
-			correct = CheckRand(i,1);
+			randomCard(i, 1, player1cards, player2cards, player3cards, player4cards);
+			correct = CheckRand(i,1, player1cards, player2cards, player3cards, player4cards);
 		}while(correct == 1);
 	}
 	
@@ -111,8 +111,8 @@ void RunTexasHoldem(void)
 	{
 		do
 		{
-			randomCard(i, 2);
-			correct = CheckRand(i,2);
+			randomCard(i, 2, player1cards, player2cards, player3cards, player4cards);
+			correct = CheckRand(i,2, player1cards, player2cards, player3cards, player4cards);
 		}while(correct == 1);
 		switch (i)
 		{
@@ -136,8 +136,8 @@ void RunTexasHoldem(void)
 	{
 		do
 		{
-			randomCard(i, 2);
-			correct = CheckRand(i,2);
+			randomCard(i, 2, player1cards, player2cards, player3cards, player4cards);
+			correct = CheckRand(i,2, player1cards, player2cards, player3cards, player4cards);
 		}while(correct == 1);
 	}
 
@@ -273,7 +273,7 @@ void randomCard(int playeridentifier, int draw, int player1cards[][2], int playe
 }
 
 //this function checks to make sure the card chosen by randomCard is not already chosen
-int CheckRand(int playeridentifier, int draw, int player1cards, int player2cards, int player3cards, int player4cards)
+int CheckRand(int playeridentifier, int draw, int player1cards[][2], int player2cards[][2], int player3cards[][2], int player4cards[][2])
 {
 	int correct = 1;
 	switch(playeridentifier)
@@ -398,7 +398,7 @@ void randomCommunityCard(int draw, int communitycards[][2])
 	}
 }
 
-//this function checks to make sure the cards/card chosen by randomCard is not already chosen
+//this function checks to make sure the cards/card chosen by randomCommunityCard is not already chosen
 int CheckRandCommunity(int draw, int communitycards[][2])
 {
 	int correct = 0;
