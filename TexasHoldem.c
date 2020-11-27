@@ -14,10 +14,13 @@ void RunTexasHoldem(void);
 //chooses how many players are playing
 int playerChoice(void);
 //betting function(still working on)
-void DefineBet(int, double[]);
+//every time this function is called it runs a round of betting
+void BettingRound(double pot, double player_money[], int playernum, int players_folded[4]);
+double GetPlayerBet();
+double MakeCPUBet();
 
 //This is the new function that draws random cards. it can add a card to either a players hand or the table.
-void DrawRandomCard(int card_drawn[2], int cards_already_drawn[4][13]);
+void DrawRandomCard(int card_drawn[], int cards_already_drawn[][13]);
 /* ##################################################################### */
 /* ################################ MAIN ############################### */
 /* ##################################################################### */
@@ -73,73 +76,84 @@ void RunTexasHoldem(void) {
 	
 	//game flow
 	do {
+		//stores whether a play is folded
+		//-1 is fold 1
+		int players_folded[4] = {0,0,0,0};
 		//deals the cards to players
 		//PLAYER 1
 		DrawRandomCard(card_drawn, cards_already_drawn);
 		player1cards[0][0] = card_drawn[0];
-		player1cards[0][1] = cards_already_drawn[1];
+		player1cards[0][1] = card_drawn[1];
 		DrawRandomCard(card_drawn, cards_already_drawn);
 		player1cards[1][0] = card_drawn[0];
-		player1cards[1][1] = cards_already_drawn[1];
+		player1cards[1][1] = card_drawn[1];
 		//PLAYER 2
 		DrawRandomCard(card_drawn, cards_already_drawn);
 		player2cards[0][0] = card_drawn[0];
-		player2cards[0][1] = cards_already_drawn[1];
+		player2cards[0][1] = card_drawn[1];
 		DrawRandomCard(card_drawn, cards_already_drawn);
 		player2cards[1][0] = card_drawn[0];
-		player2cards[1][1] = cards_already_drawn[1];
+		player2cards[1][1] = card_drawn[1];
 		//PLAYER 3
 		DrawRandomCard(card_drawn, cards_already_drawn);
 		player3cards[0][0] = card_drawn[0];
-		player3cards[0][1] = cards_already_drawn[1];
+		player3cards[0][1] = card_drawn[1];
 		DrawRandomCard(card_drawn, cards_already_drawn);
 		player3cards[1][0] = card_drawn[0];
-		player3cards[1][1] = cards_already_drawn[1];
+		player3cards[1][1] = card_drawn[1];
 		//PLAYER 4
 		DrawRandomCard(card_drawn, cards_already_drawn);
 		player4cards[0][0] = card_drawn[0];
-		player4cards[0][1] = cards_already_drawn[1];
+		player4cards[0][1] = card_drawn[1];
 		DrawRandomCard(card_drawn, cards_already_drawn);
 		player4cards[1][0] = card_drawn[0];
-		player4cards[1][1] = cards_already_drawn[1];
+		player4cards[1][1] = card_drawn[1];
 
 
 		//NEED TO ADD A DISPLAY CARDS TO THE REAL PLAYERS HERE, MAKE THIS IN A FUNCTION
-
+		printf("CARD 1: %d, %d\n", player1cards[0][0], player1cards[0][1]);
+		printf("CARD 2: %d, %d\n", player1cards[1][0], player1cards[1][1]);
 		//HERE we enter the first round of betting
+		BettingRound(pot, player_money, playerNum, players_folded);
 		//first round of betting ends
+		printf("\n\nTHE FLOP\n\n");
 		//deals the FLOP(3 cards to the community cards)
 		DrawRandomCard(card_drawn, cards_already_drawn);
 		communitycards[0][0] = card_drawn[0];
-		communitycards[0][1] = cards_already_drawn[1];
+		communitycards[0][1] = card_drawn[1];
 		DrawRandomCard(card_drawn, cards_already_drawn);
 		communitycards[1][0] = card_drawn[0];
-		communitycards[1][1] = cards_already_drawn[1];
+		communitycards[1][1] = card_drawn[1];
 		DrawRandomCard(card_drawn, cards_already_drawn);
 		communitycards[2][0] = card_drawn[0];
-		communitycards[2][1] = cards_already_drawn[1];
+		communitycards[2][1] = card_drawn[1];
 		//HERE we enter the second round of betting
+		BettingRound(pot, player_money, playerNum, players_folded);
+		printf("\n\nTHE RIVER\n\n");
 		//second round of beeting ends
 		//we deal 1 more card to the comunity pile
 		DrawRandomCard(card_drawn, cards_already_drawn);
 		communitycards[3][0] = card_drawn[0];
-		communitycards[3][1] = cards_already_drawn[1];
+		communitycards[3][1] = card_drawn[1];
 		//here we enter the third round of betting
+		BettingRound(pot, player_money, playerNum, players_folded);
 		//third round of betting ends
+		printf("\n\nTHE DRAW\n\n");
 		//we deal 1 more last card to the community pile
 		DrawRandomCard(card_drawn, cards_already_drawn);
 		communitycards[4][0] = card_drawn[0];
-		communitycards[4][1] = cards_already_drawn[1];
+		communitycards[4][1] = card_drawn[1];
 		//last round of betting
-
+		BettingRound(pot, player_money, playerNum, players_folded);
 		//determine who has won
-
+		printf("\n\nEND ROUND\n\n");
 		//distrubute the money to the winner, or split in case of muttiple winner
 
 		//clean up stuff
 		//clear the player_bets--THIS MIGHT NEED TO BE DONE BETWEEN EVERY ROUND OF BETTING
 		//clear the cards drawn
 		//ask if they want to go again
+		keep_playing = 'n';
 	} while(keep_playing == 'y');
 
 
@@ -159,77 +173,8 @@ int playerChoice(void) {
 //defines the initial bets for the players and cpu's if applicable
 //i am not too familiar with betting in this game so I will leave it to one of you guys to figure it out
 //i made this function for the bets, but I don't know how the blinds and different roles factor in
-void DefineBet(int playerNum, double playerbets[])
-{
-	//players are player1=0, player2=1, player3=2, and player4=3, going clockwise
-	int dealer = 0; //Start with first player=0 as dealer
-	int smallblind = (dealer+1)%4;
-	int bigblind = (dealer+2)%4;
 
-
-	//Define initial bets
-	switch(playerNum)
-	{
-		//one player 3 cpu
-		case 1:
-		printf("Player %d is the dealer, player %d is the small blind, and player %d is the big blind", dealer, smallblind, bigblind);
-		playerbets[smallblind] = 1;
-		playerbets[bigblind] = 2;
-		//cpus are players 1, 2, and 3
-		if ((dealer+3)%4 == 4)
-		{
-			printf("What is Player %d's bet? ", (dealer+3)%4);
-			scanf("%lf", playerbets[(dealer+3)%4]);
-		}
-		else
-		{
-			playerbets[(dealer+3)%4] = 2;
-		}
-		
-		
-		
-		break;
-		
-		//two players two cpu
-		//cpus are players 1 and 2
-		case 2:
-		printf("Player %d is the dealer, player %d is the small blind, and player %d is the big blind", dealer, (dealer+1)%4, (dealer+2)%4);
-		if ((dealer+3)%4 >= 3)
-		{
-			printf("What is Player %d's bet? ", (dealer+3)%4);
-			scanf("%lf", playerbets[(dealer+3)%4]);
-		}
-		else
-		{
-			playerbets[(dealer+3)%4] = 2;
-		}
-		
-		break;
-		
-		//three players one cpu
-		//cpu is player 1
-		case 3:
-		printf("Player %d is the dealer, player %d is the small blind, and player %d is the big blind", dealer, (dealer+1)%4, (dealer+2)%4);
-		if ((dealer+3)%4 >= 2)
-		{
-			printf("What is Player %d's bet? ", (dealer+3)%4);
-			scanf("%lf", playerbets[(dealer+3)%4]);
-		}
-		else
-		{
-			playerbets[(dealer+3)%4] = 2;
-		}
-		break;
-		
-		//four players no cpu
-		case 4:
-		printf("Player %d is the dealer, player %d is the small blind, and player %d is the big blind", dealer, (dealer+1)%4, (dealer+2)%4);
-		printf("What is Player %d's bet? ", (dealer+3)%4);
-		scanf("%lf", playerbets[(dealer+3)%4]);
-		break;
-	}
-}
-void DrawRandomCard(int card_drawn[2], int cards_already_drawn[4][13]) {
+void DrawRandomCard(int card_drawn[], int cards_already_drawn[][13]) {
 	do {
 		//Draws a random suit
 		card_drawn[0] = rand() % 4;
@@ -238,4 +183,57 @@ void DrawRandomCard(int card_drawn[2], int cards_already_drawn[4][13]) {
 	} while(cards_already_drawn[card_drawn[0]][card_drawn[1]] == 1);//this checks if the card drawn has already been drawn
 	//sets the card drawn to true in our cards already drawn matrix
 	cards_already_drawn[card_drawn[0]][card_drawn[1]] = 1;
+}
+void BettingRound(double pot, double player_money[], int playernum, int players_folded[]) {
+	//stores the current max of the bets IE what you would need to call to
+	double current_max = 0;
+	//stores each players current bets for the round
+	double playerbets[4] = {0,0,0,0};
+	//stores the number of players that are done with beeting
+	int players_done_betting = 0;
+	do {
+		for (int i = 0; i < playernum; i++) { //player bets
+			if (players_folded[i] == 0) {
+				printf("PLAYER %d MAKE BET\n", i);
+				double their_bet = GetPlayerBet();
+				if (their_bet == -1.0) { //THEY FOLDED
+					players_folded[i] = their_bet;
+				} else if (playerbets[i] + their_bet == current_max) {//THEY CALLED
+					playerbets[i] += their_bet;
+					player_money[i] -= their_bet;
+					pot += their_bet;
+				} else { //THEY RAISED
+					playerbets[i] += their_bet;
+					player_money[i] -= their_bet;
+					current_max = playerbets[i];
+					pot += their_bet;
+				}
+			}
+		}
+		printf("CPU TIME");
+		for (int i = playernum; i < 4; i++) {//CPU BETS
+			//CPUS always call
+			double their_bet = current_max - playerbets[i];
+			playerbets[i] += their_bet;
+			player_money[i] -= their_bet;
+			pot += their_bet;
+		}
+		printf("Currently bets are\nPlayer 1: %lf\n\nPlayer 2: %lf\n\nPlayer 3: %lf\n\nPlayer 4: %lf\\nn", playerbets[0], playerbets[1], playerbets[2], playerbets[3]);
+		printf("Current max is: %lf\n", current_max);
+		players_done_betting = 0;
+		for(int i = 0; i < 4; i++) {
+			if (players_folded[i] == -1) {//That player folded
+				players_done_betting++;
+			} else if (playerbets[i] == current_max) {//that player has called
+				players_done_betting++;
+			}
+		}
+		printf("Players done betting: %d", players_done_betting);
+	} while(players_done_betting < 4);
+}
+double GetPlayerBet() {
+	double player_bet;
+	printf("Enter your bet, to fold enter -1.\nBet: ");
+	scanf("%lf", &player_bet);
+	return player_bet;
 }
