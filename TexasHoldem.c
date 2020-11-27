@@ -194,7 +194,6 @@ void BettingRound(double pot, double player_money[], int playernum, int players_
 	do {
 		for (int i = 0; i < playernum; i++) { //player bets
 			if (players_folded[i] == 0) {
-				printf("PLAYER %d MAKE BET\n", i);
 				double their_bet = GetPlayerBet();
 				if (their_bet == -1.0) { //THEY FOLDED
 					players_folded[i] = their_bet;
@@ -210,7 +209,6 @@ void BettingRound(double pot, double player_money[], int playernum, int players_
 				}
 			}
 		}
-		printf("CPU TIME");
 		for (int i = playernum; i < 4; i++) {//CPU BETS
 			//CPUS always call
 			double their_bet = current_max - playerbets[i];
@@ -218,8 +216,7 @@ void BettingRound(double pot, double player_money[], int playernum, int players_
 			player_money[i] -= their_bet;
 			pot += their_bet;
 		}
-		printf("Currently bets are\nPlayer 1: %lf\n\nPlayer 2: %lf\n\nPlayer 3: %lf\n\nPlayer 4: %lf\\nn", playerbets[0], playerbets[1], playerbets[2], playerbets[3]);
-		printf("Current max is: %lf\n", current_max);
+		printf("Currently bets are\nPlayer 1: %lf\n\nPlayer 2: %lf\n\nPlayer 3: %lf\n\nPlayer 4: %lf\n\n", playerbets[0], playerbets[1], playerbets[2], playerbets[3]);
 		players_done_betting = 0;
 		for(int i = 0; i < 4; i++) {
 			if (players_folded[i] == -1) {//That player folded
@@ -228,7 +225,6 @@ void BettingRound(double pot, double player_money[], int playernum, int players_
 				players_done_betting++;
 			}
 		}
-		printf("Players done betting: %d", players_done_betting);
 	} while(players_done_betting < 4);
 }
 double GetPlayerBet() {
