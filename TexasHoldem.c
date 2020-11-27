@@ -19,6 +19,8 @@ void BettingRound(double pot, double player_money[], int playernum, int players_
 double GetPlayerBet();
 double MakeCPUBet();
 
+void DisplayCards(int player1cards[][2], int player2cards[][2], int player3cards[][2], int player4cards[][2]);
+
 //This is the new function that draws random cards. it can add a card to either a players hand or the table.
 void DrawRandomCard(int card_drawn[], int cards_already_drawn[][13]);
 /* ##################################################################### */
@@ -232,4 +234,83 @@ double GetPlayerBet() {
 	printf("Enter your bet, to fold enter -1.\nBet: ");
 	scanf("%lf", &player_bet);
 	return player_bet;
+}
+
+//Displays each player's private/hole cards to that player
+void DisplayCards(int player1cards[][2], int player2cards[][2], int player3cards[][2], int player4cards[][2]) {
+	
+	int response;
+	
+	//Display Player 1's cards
+	printf("Make sure only Player 1 is looking at the screen");
+	do {
+		printf("When ready, type \"1\".");
+		scanf("%d", &response);
+	} while (response != 1);
+	printf("Player 1, here are your hole cards:\n");
+	printf("Card 1: \n");
+	printf("Suit: %d Value: %d\n", player1cards[0][0], player1cards[0][1]);
+	printf("Card 2: \n");
+	printf("Suit: %d Value: %d\n", player1cards[1][0], player1cards[1][1]);
+	do {
+		printf("When you have finished looking at your cards, type \"1\".");
+		scanf("%d", &response);
+	} while (response != 1);
+	//Clears the screen
+	printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+	
+	//Display Player 2's cards
+		printf("Make sure only Player 2 is looking at the screen");
+	do {
+		printf("When ready, type \"1\".");
+		scanf("%d", &response);
+	} while (response != 1);
+	printf("Player 2, here are your hole cards:\n");
+	printf("Card 1: \n");
+	printf("Suit: %d Value: %d\n", player2cards[0][0], player2cards[0][1]);
+	printf("Card 2: \n");
+	printf("Suit: %d Value: %d\n", player2cards[1][0], player2cards[1][1]);
+	do {
+		printf("When you have finished looking at your cards, type \"1\".");
+		scanf("%d", &response);
+	} while (response != 1);
+	//Clears the screen
+	printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+
+	//Display Player 3's cards
+	printf("Make sure only Player 3 is looking at the screen");
+	do {
+		printf("When ready, type \"1\".");
+		scanf("%d", &response);
+	} while (response != 1);
+	printf("Player 3, here are your hole cards:\n");
+	printf("Card 1: \n");
+	printf("Suit: %d Value: %d\n", player3cards[0][0], player3cards[0][1]);
+	printf("Card 2: \n");
+	printf("Suit: %d Value: %d\n", player3cards[1][0], player3cards[1][1]);
+	do {
+		printf("When you have finished looking at your cards, type \"1\".");
+		scanf("%d", &response);
+	} while (response != 1);
+	//Clears the screen
+	printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+
+
+	//Display Player 4's cards
+	printf("Make sure only Player 4 is looking at the screen");
+	do {
+		printf("When ready, type \"1\".");
+		scanf("%d", &response);
+	} while (response != 1);
+	printf("Player 4, here are your hole cards:\n");
+	printf("Card 1: \n");
+	printf("Suit: %d Value: %d\n", player4cards[0][0], player4cards[0][1]);
+	printf("Card 2: \n");
+	printf("Suit: %d Value: %d\n", player4cards[1][0], player4cards[1][1]);
+	do {
+		printf("When you have finished looking at your cards, type \"1\".");
+		scanf("%d", &response);
+	} while (response != 1);
+	//Clears the screen
+	printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 }
