@@ -242,54 +242,54 @@ void DisplayCards(int player1cards[][2], int player2cards[][2], int player3cards
 	int response;
 	
 	//Display Player 1's cards
-	printf("Make sure only Player 1 is looking at the screen");
+	printf("Make sure only Player 1 is looking at the screen \n");
 	do {
-		printf("When ready, type \"1\".");
+		printf("When ready, type \"1\". ");
 		scanf("%d", &response);
 	} while (response != 1);
 	printf("Player 1, here are your hole cards:\n");
 	printf("Card 1: \n");
-	printf("Suit: %d Value: %d\n", player1cards[0][0], player1cards[0][1]);
+	printf("\tSuit: %d Value: %d\n", player1cards[0][0], player1cards[0][1]);
 	printf("Card 2: \n");
-	printf("Suit: %d Value: %d\n", player1cards[1][0], player1cards[1][1]);
+	printf("\tSuit: %d Value: %d\n", player1cards[1][0], player1cards[1][1]);
 	do {
-		printf("When you have finished looking at your cards, type \"1\".");
+		printf("When you have finished looking at your cards, type \"1\". ");
 		scanf("%d", &response);
 	} while (response != 1);
 	//Clears the screen
 	printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 	
 	//Display Player 2's cards
-		printf("Make sure only Player 2 is looking at the screen");
+		printf("Make sure only Player 2 is looking at the screen \n");
 	do {
-		printf("When ready, type \"1\".");
+		printf("When ready, type \"1\". ");
 		scanf("%d", &response);
 	} while (response != 1);
 	printf("Player 2, here are your hole cards:\n");
 	printf("Card 1: \n");
-	printf("Suit: %d Value: %d\n", player2cards[0][0], player2cards[0][1]);
+	printf("\tSuit: %d Value: %d\n", player2cards[0][0], player2cards[0][1]);
 	printf("Card 2: \n");
-	printf("Suit: %d Value: %d\n", player2cards[1][0], player2cards[1][1]);
+	printf("\tSuit: %d Value: %d\n", player2cards[1][0], player2cards[1][1]);
 	do {
-		printf("When you have finished looking at your cards, type \"1\".");
+		printf("When you have finished looking at your cards, type \"1\". ");
 		scanf("%d", &response);
 	} while (response != 1);
 	//Clears the screen
 	printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 
 	//Display Player 3's cards
-	printf("Make sure only Player 3 is looking at the screen");
+	printf("Make sure only Player 3 is looking at the screen \n");
 	do {
-		printf("When ready, type \"1\".");
+		printf("When ready, type \"1\". ");
 		scanf("%d", &response);
 	} while (response != 1);
 	printf("Player 3, here are your hole cards:\n");
 	printf("Card 1: \n");
-	printf("Suit: %d Value: %d\n", player3cards[0][0], player3cards[0][1]);
+	printf("\tSuit: %d Value: %d\n", player3cards[0][0], player3cards[0][1]);
 	printf("Card 2: \n");
-	printf("Suit: %d Value: %d\n", player3cards[1][0], player3cards[1][1]);
+	printf("\tSuit: %d Value: %d\n", player3cards[1][0], player3cards[1][1]);
 	do {
-		printf("When you have finished looking at your cards, type \"1\".");
+		printf("When you have finished looking at your cards, type \"1\". ");
 		scanf("%d", &response);
 	} while (response != 1);
 	//Clears the screen
@@ -297,18 +297,18 @@ void DisplayCards(int player1cards[][2], int player2cards[][2], int player3cards
 
 
 	//Display Player 4's cards
-	printf("Make sure only Player 4 is looking at the screen");
+	printf("Make sure only Player 4 is looking at the screen \n");
 	do {
-		printf("When ready, type \"1\".");
+		printf("When ready, type \"1\". ");
 		scanf("%d", &response);
 	} while (response != 1);
 	printf("Player 4, here are your hole cards:\n");
 	printf("Card 1: \n");
-	printf("Suit: %d Value: %d\n", player4cards[0][0], player4cards[0][1]);
+	printf("\tSuit: %d Value: %d\n", player4cards[0][0], player4cards[0][1]);
 	printf("Card 2: \n");
-	printf("Suit: %d Value: %d\n", player4cards[1][0], player4cards[1][1]);
+	printf("\tSuit: %d Value: %d\n", player4cards[1][0], player4cards[1][1]);
 	do {
-		printf("When you have finished looking at your cards, type \"1\".");
+		printf("When you have finished looking at your cards, type \"1\". ");
 		scanf("%d", &response);
 	} while (response != 1);
 	//Clears the screen
