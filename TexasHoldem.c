@@ -41,10 +41,8 @@ int main() {
 	//seeding for random number
 	unsigned seed = 7;
 	srand(seed);
-	
-	Directions();
 	RunTexasHoldem();
-	
+
 	return 0;
 }
 
@@ -62,6 +60,8 @@ void Directions(void) {
 //this function runs the game and houses most of the other functions
 // the order of dealings also goes into this
 void RunTexasHoldem(void) {
+	//displays directions
+	Directions();
 	//stores each players money total
 	double player_money[4] = {5000, 5000, 5000, 5000};
 	//stores the card drawn by the draw card function
