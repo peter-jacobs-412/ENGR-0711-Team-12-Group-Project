@@ -248,7 +248,7 @@ double BettingRound(double pot, double player_money[], int playernum, int player
 	int players_done_betting = 0;
 	do {
 		for (int i = 0; i < playernum; i++) { //player bets
-			if (players_folded[i] == 0) {
+			if (players_folded[i] != -1) {
 				printf("Player %d \n", i+1);
 				double their_bet = GetPlayerBet();
 				if (their_bet == -1.0) { //THEY FOLDED
