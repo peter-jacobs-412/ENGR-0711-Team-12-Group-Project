@@ -39,7 +39,7 @@ int CheckNorthWest(int row, int col, int board[][7]);
 int CheckSpot(int row, int col, int board[][7]);
 
 //This function should check the board for any winning sequences of 4 or more tiles in a row to detect any wins and saves the location of any wins in winningSpace
-int CheckWinner(int board[][7], int winningSpace[]);
+bool CheckWinner(int board[][7], int winningSpace[]);
 
 //this function is meant for debugging and testing purposes it will have a bunch of diffrent code in it all of which can be commented out in order to test specifc things
 void TesterFunction(int board[][7]);
@@ -115,16 +115,23 @@ void RunConnectFour() {
     bool valid_move = false;
     //This stores the board and all of its values 0-empty 1-player 1 2-player 2
     int board[6][7] = {{0,0,0,0,0,0,0}, {0,0,0,0,0,0,0}, {0,0,0,0,0,0,0}, {0,0,0,0,0,0,0}, {0,0,0,0,0,0,0}, {0,0,0,0,0,0,0}};
+	int winning_space[2];
     while (game_over == false) {
         DisplayBoard(board);
         do {
             DoMove(1, GetPlayerMove(), board);
         } while (valid_move = false);
+		game_over = CheckWinner(board, winning_space);
+		if (game_over == true) break;
         DisplayBoard(board);
         do {
-            DoMove(1, GetPlayerMove(), board);
+            DoMove(2, GetPlayerMove(), board);
         } while (valid_move = false);
+		game_over = CheckWinner(board, winning_space);
     }
+	printf("GAME OVER!!!\n");
+	printf("PLAYER %d WON WITH A CONNECT 4 AT %d, %d\n", board[winning_space[0]][winning_space[1]], 6 - winning_space[0], winning_space[1] + 1);
+	DisplayBoard(board);
 }
 int GetPlayerMove() {
     printf("Enter Your Move: ");
@@ -299,20 +306,21 @@ int CheckSpot(int row, int col, int board[][7]) {
     }
     return max;
 }
-int CheckWinner(int board[][7], int winningSpace[]) {
-    int i, j;
-    for (i=0; i<6; i++) {
-        for (j=0; j<7; j++) {
-            if (CheckSpot(i, j, board)>=4) {
-                //If a win is detected, return 1 and save the location the win was at in the winningSpace array
-                winningSpace[0]=i;
-                winningSpace[1]=j;
-                return 1;
-            }
+bool CheckWinner(int board[][7], int winningSpace[]) {
+    for (int i = 0; i < 6; i++) {
+        for (int j = 0; j < 7; j++) {
+			if (board[i][j] != 0) {
+				if (CheckSpot(i, j, board) >= 4) {
+					//If a win is detected, return true and save the location the win was at in the winningSpace array
+					winningSpace[0] = i;
+					winningSpace[1] = j;
+					return true;
+				}
+			}
         }
     }
-    //If no win is detected, return 0
-    return 0;
+    //If no win is detected, return false
+    return false;
 }
 void TesterFunction(int board[][7]) {
     //check the return value of north west east and south for a given i and j location
