@@ -80,17 +80,23 @@ void RunTexasHoldem(void) {
 	playerNum = playerChoice();
 	//stores if they want to keep playing
 	char keep_playing = 'y';
-	
+	//stores whether a play is folded
+	//-1 is fold 1
+	int players_folded[4];
+	//This stores cards that have been drawn this round
+	int cards_already_drawn[4][13];
+	//stores the pot of the current round
+	double pot = 0;
 	//game flow
 	do {
-		//these three varibles are declared here so they reset every round
-		//stores whether a play is folded
-		//-1 is fold 1
-		int players_folded[4] = {0,0,0,0};
-		//This stores cards that have been drawn this round
-		int cards_already_drawn[4][13];
-		//stores the pot of the current round
-		double pot = 0;
+		//resets certain vars
+		for (int i = 0; i < 4; i++) {
+			players_folded[i] = 0;
+			for (int j = 0; j < 13; j++) {
+				cards_already_drawn[i][j] = 0;
+			}
+		}
+		pot = 0;
 		//deals the cards to players
 		//PLAYER 1
 		DrawRandomCard(card_drawn, cards_already_drawn);
