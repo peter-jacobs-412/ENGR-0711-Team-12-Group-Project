@@ -119,13 +119,13 @@ void RunConnectFour() {
     while (game_over == false) {
         DisplayBoard(board);
         do {
-            DoMove(1, GetPlayerMove(), board);
+            valid_move = DoMove(1, GetPlayerMove(), board);
         } while (valid_move == false);
 		game_over = CheckWinner(board, winning_space);
 		if (game_over == true) break;
         DisplayBoard(board);
         do {
-            DoMove(2, GetPlayerMove(), board);
+            valid_move = DoMove(2, GetPlayerMove(), board);
         } while (valid_move == false);
 		game_over = CheckWinner(board, winning_space);
     }
