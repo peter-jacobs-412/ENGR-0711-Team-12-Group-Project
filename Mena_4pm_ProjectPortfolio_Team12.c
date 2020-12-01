@@ -120,13 +120,13 @@ void RunConnectFour() {
         DisplayBoard(board);
         do {
             DoMove(1, GetPlayerMove(), board);
-        } while (valid_move = false);
+        } while (valid_move == false);
 		game_over = CheckWinner(board, winning_space);
 		if (game_over == true) break;
         DisplayBoard(board);
         do {
             DoMove(2, GetPlayerMove(), board);
-        } while (valid_move = false);
+        } while (valid_move == false);
 		game_over = CheckWinner(board, winning_space);
     }
 	printf("GAME OVER!!!\n");
