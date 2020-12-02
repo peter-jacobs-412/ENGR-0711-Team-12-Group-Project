@@ -21,8 +21,8 @@ int GetPlayerMove();
 //Returns false if the move cant be executed
 bool DoMove(int player, int colummn, int board[][7]);
 
-//this sets of functions checks how many pieces of equal value are in that direction given a location in the array
-//when working with the functions we will use iterators of i and j for the rows and columns specfically.
+//this set of functions checks how many pieces of equal value are in that direction given a location in the array
+//when working with the functions we will use iterators of i and j for the rows and columns specifically.
 //note that becasue of the way array indexes work south is defined as postive i direction and east is defined as postive j
 int CheckNorth(int row, int col, int board[][7]);
 int CheckEast(int row, int col, int board[][7]);
@@ -66,13 +66,13 @@ int playerChoice(void);
 //returns the new pot
 double BettingRound(double pot, double player_money[], int playernum, int players_folded[4]);
 
-//gets a players bet
+//gets a player's bet
 double GetPlayerBet();
 
 //displays players cards to the players
 void DisplayCards(int player1cards[][2], int player2cards[][2], int player3cards[][2], int player4cards[][2]);
 
-//This is the new function that draws random cards. it can add a card to either a players hand or the table.
+//This is the new function that draws random cards. It can add a card to either a players hand or the table.
 void DrawRandomCard(int card_drawn[], int cards_already_drawn[][13]);
 
 //this function distrubutes the money to the player(s) that won
@@ -83,7 +83,7 @@ void DisplayMoney(double player_money[], double pot);
 /* ################################ MAIN ############################### */
 /* ##################################################################### */
 int main() {
-    //asks them which game they want to plays
+    //asks them which game they want to play
     int which_game;
     printf("Would You like to play GAME 1 (Connect Four) or GAME 2 (Texas hold 'em)? (1/2): ");
     scanf("%d", &which_game);
@@ -441,7 +441,7 @@ void RunTexasHoldem(void) {
 		pot = BettingRound(pot, player_money, playerNum, players_folded);
 		//second round of beeting ends
 		printf("\n\nTHE RIVER\n\n");
-		//we deal 1 more card to the comunity pile
+		//we deal 1 more card to the community pile
 		DrawRandomCard(card_drawn, cards_already_drawn);
 		communitycards[3][0] = card_drawn[0];
 		communitycards[3][1] = card_drawn[1];
