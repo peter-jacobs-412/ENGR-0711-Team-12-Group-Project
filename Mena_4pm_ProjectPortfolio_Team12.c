@@ -1,4 +1,4 @@
-//Team 12 Group Project
+//Team 12 Group Project, Peter Jacobs, Aaron Wang, Arun Guduru
 #include<stdio.h>
 #include<stdlib.h>
 #include<stdbool.h>
@@ -8,8 +8,6 @@
 /* #################### GAME 1 FUNCTION DECLARATIONS ################### */
 /* ##################################################################### */
 //Everything needed to run the connect 4 game will be contained inside this function to keep main cleaner.
-//Depending on how we do the game this might have an input for Player Vs AI or Player Vs Player.
-//One idea i have for this if we make it an option is its an int 0 is player 1 is easy Ai 2 is medium AI 3 is Hard AI
 void RunConnectFour();
 
 //This function displays the board
@@ -24,7 +22,7 @@ int GetPlayerMove();
 bool DoMove(int player, int colummn, int board[][7]);
 
 //this sets of functions checks how many pieces of equal value are in that direction given a location in the array
-//when working with the functions wee will use iterators of i and j for the rows and coluummns specfically.
+//when working with the functions we will use iterators of i and j for the rows and columns specfically.
 //note that becasue of the way array indexes work south is defined as postive i direction and east is defined as postive j
 int CheckNorth(int row, int col, int board[][7]);
 int CheckEast(int row, int col, int board[][7]);
@@ -87,7 +85,7 @@ void DisplayMoney(double player_money[], double pot);
 int main() {
     //asks them which game they want to plays
     int which_game;
-    printf("Would You like to play GAME 1 or GAME 2? (1/2): ");
+    printf("Would You like to play GAME 1 (Connect Four) or GAME 2 (Texas hold 'em)? (1/2): ");
     scanf("%d", &which_game);
     //Error check
     while (which_game != 1 && which_game != 2) {
@@ -511,8 +509,6 @@ int playerChoice(void) {
 }
 
 //defines the initial bets for the players and cpu's if applicable
-//i am not too familiar with betting in this game so I will leave it to one of you guys to figure it out
-//i made this function for the bets, but I don't know how the blinds and different roles factor in
 
 void DrawRandomCard(int card_drawn[], int cards_already_drawn[][13]) {
 	do {
